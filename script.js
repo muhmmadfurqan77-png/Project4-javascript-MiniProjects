@@ -1,31 +1,29 @@
-let story = 'Last weekend, I took literally the most beautiful trip to the beach. I went to the beach with my friends and we literally had a great time. The waves were literally crashing and the sand was literally so hot. We ate literally sandwiches and drank literally lemonade. It was literally the best day ever.';
-
-let storyWords = story.split(' ');
-console.log(storyWords);
-
-console.log(storyWords.join(' '));
-
-let count = 0;
-storyWords.forEach(word => {
-  count++;
-});
-console.log(count);
-
-storyWords = storyWords.filter(word => word!== 'literally');
-console.log(storyWords.join(' '));
-
-storyWords = storyWords.map(word => {
-  if (word === 'beautiful') {
-    return 'stunning';
-  } else {
-    return word;
+const menu = {
+  _meal: '',
+  _price: 0,
+  
+  set meal(mealToCheck) {
+    if (typeof mealToCheck === 'string') {
+      this._meal = mealToCheck;
+    }
+  },
+  
+  set price(priceToCheck) {
+    if (typeof priceToCheck === 'number') {
+      this._price = priceToCheck;
+    }
+  },
+  
+  get todaysSpecial() {
+    if (this._meal && this._price) {
+      return `Today's Special is ${this._meal} for $${this._price}!`;
+    } else {
+      return 'Meal or price was not set correctly!';
+    }
   }
-});
-console.log(storyWords.join(' '));
+};
 
-const badWordIndex = storyWords.findIndex(word => word === 'sandwiches');
-storyWords[badWordIndex] = 'snacks';
-console.log(storyWords.join(' '));
+menu.meal = 'Spaghetti';
+menu.price = 5;
 
-let longWord = storyWords.find(word => word.length > 10);
-console.log(longWord);
+console.log(menu.todaysSpecial);
