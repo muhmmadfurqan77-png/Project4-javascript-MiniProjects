@@ -1,29 +1,44 @@
-const menu = {
-  _meal: '',
-  _price: 0,
+const team = {
+  _players: [
+    {firstName: 'Pablo', lastName: 'Sanchez', age: 11},
+    {firstName: 'Lisa', lastName: 'Simpson', age: 10},
+    {firstName: 'Bill', lastName: 'Clinton', age: 20}
+  ],
+  _games: [
+    {opponent: 'Broncos', teamPoints: 42, opponentPoints: 27},
+    {opponent: 'Chargers', teamPoints: 31, opponentPoints: 24},
+    {opponent: 'Raiders', teamPoints: 20, opponentPoints: 21}
+  ],
   
-  set meal(mealToCheck) {
-    if (typeof mealToCheck === 'string') {
-      this._meal = mealToCheck;
-    }
+  get players() {
+    return this._players;
   },
   
-  set price(priceToCheck) {
-    if (typeof priceToCheck === 'number') {
-      this._price = priceToCheck;
-    }
+  get games() {
+    return this._games;
   },
   
-  get todaysSpecial() {
-    if (this._meal && this._price) {
-      return `Today's Special is ${this._meal} for $${this._price}!`;
-    } else {
-      return 'Meal or price was not set correctly!';
-    }
+  addPlayer(newFirstName, newLastName, newAge) {
+    let player = {
+      firstName: newFirstName,
+      lastName: newLastName,
+      age: newAge
+    };
+    this._players.push(player);
+  },
+  
+  addGame(newOpponent, newTeamPoints, newOpponentPoints) {
+    let game = {
+      opponent: newOpponent,
+      teamPoints: newTeamPoints,
+      opponentPoints: newOpponentPoints
+    };
+    this._games.push(game);
   }
 };
 
-menu.meal = 'Spaghetti';
-menu.price = 5;
+team.addPlayer('Bugs', 'Bunny', 76);
+console.log(team.players);
 
-console.log(menu.todaysSpecial);
+team.addGame('Titans', 100, 98);
+console.log(team.games);
