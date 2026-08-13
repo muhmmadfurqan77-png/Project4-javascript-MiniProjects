@@ -1,17 +1,59 @@
-let raceNumber = Math.floor(Math.random() * 1000);
-let registeredEarly = true;
-let runnerAge = 20;
+const getUserChoice = userInput => {
+  userInput = userInput.toLowerCase();
+  if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors' || userInput === 'bomb') {
+    return userInput;
+  } else {
+    console.log('Error: Invalid choice');
+  }
+};
 
-if (runnerAge > 18 && registeredEarly) {
-  raceNumber += 1000;
-}
+const getComputerChoice = () => {
+  const randomNumber = Math.floor(Math.random() * 3);
+  if (randomNumber === 0) {
+    return 'rock';
+  } else if (randomNumber === 1) {
+    return 'paper';
+  } else {
+    return 'scissors';
+  }
+};
 
-if (runnerAge > 18 && registeredEarly) {
-  console.log(`Your race starts at 9:30 am. Your race number is ${raceNumber}.`);
-} else if (runnerAge > 18 && !registeredEarly) {
-  console.log(`Your race starts at 11:00 am. Your race number is ${raceNumber}.`);
-} else if (runnerAge < 18) {
-  console.log(`Your race starts at 12:30 pm. Your race number is ${raceNumber}.`);
-} else {
-  console.log("Please see the registration desk.");
-}
+const determineWinner = (userChoice, computerChoice) => {
+  if (userChoice === 'bomb') {
+    return 'You win!';
+  }
+  if (userChoice === computerChoice) {
+    return 'The game was a tie';
+  }
+  if (userChoice === 'rock') {
+    if (computerChoice === 'paper') {
+      return 'The computer won';
+    } else {
+      return 'You won';
+    }
+  }
+  if (userChoice === 'paper') {
+    if (computerChoice === 'scissors') {
+      return 'The computer won';
+    } else {
+      return 'You won';
+    }
+  }
+  if (userChoice === 'scissors') {
+    if (computerChoice === 'rock') {
+      return 'The computer won';
+    } else {
+      return 'You won';
+    }
+  }
+};
+
+const playGame = () => {
+  const userChoice = getUserChoice('rock');
+  const computerChoice = getComputerChoice();
+  console.log(`You threw: ${userChoice}`);
+  console.log(`The computer threw: ${computerChoice}`);
+  console.log(determineWinner(userChoice, computerChoice));
+};
+
+playGame();
