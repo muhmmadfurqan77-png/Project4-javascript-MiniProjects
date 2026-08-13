@@ -1,59 +1,47 @@
-const getUserChoice = userInput => {
-  userInput = userInput.toLowerCase();
-  if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors' || userInput === 'bomb') {
-    return userInput;
+const getSleepHours = day => {
+  if (day === 'monday') {
+    return 8;
+  } else if (day === 'tuesday') {
+    return 7;
+  } else if (day === 'wednesday') {
+    return 6;
+  } else if (day === 'thursday') {
+    return 8;
+  } else if (day === 'friday') {
+    return 5;
+  } else if (day === 'saturday') {
+    return 9;
+  } else if (day === 'sunday') {
+    return 8;
+  }
+};
+
+const getActualSleepHours = () => {
+  return getSleepHours('monday') + 
+  getSleepHours('tuesday') + 
+  getSleepHours('wednesday') + 
+  getSleepHours('thursday') + 
+  getSleepHours('friday') + 
+  getSleepHours('saturday') + 
+  getSleepHours('sunday');
+};
+
+const getIdealSleepHours = () => {
+  const idealHours = 8;
+  return idealHours * 7;
+};
+
+const calculateSleepDebt = () => {
+  const actualSleepHours = getActualSleepHours();
+  const idealSleepHours = getIdealSleepHours();
+  
+  if (actualSleepHours === idealSleepHours) {
+    console.log('You got the perfect amount of sleep');
+  } else if (actualSleepHours > idealSleepHours) {
+    console.log('You got ' + (actualSleepHours - idealSleepHours) + ' hours more sleep than needed');
   } else {
-    console.log('Error: Invalid choice');
+    console.log('You should get ' + (idealSleepHours - actualSleepHours) + ' hours of rest');
   }
 };
 
-const getComputerChoice = () => {
-  const randomNumber = Math.floor(Math.random() * 3);
-  if (randomNumber === 0) {
-    return 'rock';
-  } else if (randomNumber === 1) {
-    return 'paper';
-  } else {
-    return 'scissors';
-  }
-};
-
-const determineWinner = (userChoice, computerChoice) => {
-  if (userChoice === 'bomb') {
-    return 'You win!';
-  }
-  if (userChoice === computerChoice) {
-    return 'The game was a tie';
-  }
-  if (userChoice === 'rock') {
-    if (computerChoice === 'paper') {
-      return 'The computer won';
-    } else {
-      return 'You won';
-    }
-  }
-  if (userChoice === 'paper') {
-    if (computerChoice === 'scissors') {
-      return 'The computer won';
-    } else {
-      return 'You won';
-    }
-  }
-  if (userChoice === 'scissors') {
-    if (computerChoice === 'rock') {
-      return 'The computer won';
-    } else {
-      return 'You won';
-    }
-  }
-};
-
-const playGame = () => {
-  const userChoice = getUserChoice('rock');
-  const computerChoice = getComputerChoice();
-  console.log(`You threw: ${userChoice}`);
-  console.log(`The computer threw: ${computerChoice}`);
-  console.log(determineWinner(userChoice, computerChoice));
-};
-
-playGame();
+calculateSleepDebt();
