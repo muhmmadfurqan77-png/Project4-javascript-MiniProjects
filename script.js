@@ -1,12 +1,17 @@
-const kelvin = 293;
+let raceNumber = Math.floor(Math.random() * 1000);
+let registeredEarly = true;
+let runnerAge = 20;
 
-let celsius = kelvin - 273;
+if (runnerAge > 18 && registeredEarly) {
+  raceNumber += 1000;
+}
 
-let fahrenheit = celsius * (9/5) + 32;
-fahrenheit = Math.floor(fahrenheit);
-
-console.log(`The temperature is ${fahrenheit} degrees Fahrenheit.`);
-
-let newton = celsius * (33/100);
-newton = Math.floor(newton);
-console.log(`The temperature is ${newton} degrees Newton.`);
+if (runnerAge > 18 && registeredEarly) {
+  console.log(`Your race starts at 9:30 am. Your race number is ${raceNumber}.`);
+} else if (runnerAge > 18 && !registeredEarly) {
+  console.log(`Your race starts at 11:00 am. Your race number is ${raceNumber}.`);
+} else if (runnerAge < 18) {
+  console.log(`Your race starts at 12:30 pm. Your race number is ${raceNumber}.`);
+} else {
+  console.log("Please see the registration desk.");
+}
